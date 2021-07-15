@@ -10,20 +10,35 @@ class Invest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.all(10),
-        child: Column(children: [
-          //card,
-          TextButton(
-              onPressed: () =>
-                  investFunction(int.parse(amountController.text), card.player),
-              child: Text('Invest!')),
-          TextField(
-            controller: amountController,
-            //TextInputType.numberWithOptions(decimal: false, signed: false),
-            //textInputAction: TextInputAction.send,
-            decoration: InputDecoration(hintText: 'Your investment'),
-          ),
-        ]));
+    return GestureDetector(
+      onTap: () {
+        //FocusScopeNode currentFocus = FocusScope.of(context);
+        //if (!currentFocus.hasPrimaryFocus) currentFocus.unfocus();
+
+        // FocusScopeNode currentFocus = FocusScope.of(context);
+        // if (!currentFocus.hasPrimaryFocus &&
+        //     currentFocus.focusedChild != null) {
+        //   currentFocus.focusedChild.unfocus();
+        // }
+
+        // FocusManager.instance.primaryFocus.unfocus();
+      },
+      child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(children: [
+            //card,
+            TextButton(
+                onPressed: () => investFunction(
+                    int.parse(amountController.text), card.player),
+                child: Text('Invest!')),
+            TextField(
+              controller: amountController,
+              keyboardType: TextInputType.number,
+              //TextInputType.numberWithOptions(decimal: false, signed: false),
+              //textInputAction: TextInputAction.send,
+              decoration: InputDecoration(hintText: 'Your investment'),
+            ),
+          ])),
+    );
   }
 }

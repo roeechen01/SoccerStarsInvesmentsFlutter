@@ -24,6 +24,24 @@ class PlayerCard extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Text('${player.pct}%'),
+                  player.pct > 0
+                      ? Icon(
+                          Icons.arrow_circle_up,
+                          color: Colors.green,
+                          size: 40,
+                        )
+                      : Icon(
+                          Icons.arrow_circle_down,
+                          color: Colors.red,
+                          size: 40,
+                        ),
+                ],
+              )),
           Image.asset(
             player.image,
             width: 125,

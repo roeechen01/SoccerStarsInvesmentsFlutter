@@ -10,12 +10,17 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-      theme: ThemeData(
-          textTheme: TextTheme(
-              headline6: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
-    );
+    return GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child: MaterialApp(
+          home: MyHomePage(),
+          theme: ThemeData(
+              textTheme: TextTheme(
+                  headline6:
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+        ));
   }
 }
 
