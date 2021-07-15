@@ -1,26 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:soccer_stars_investments/models/player.dart';
 
 class PlayerCard extends StatelessWidget {
-  final String name;
-  final String image;
-
-  PlayerCard(this.name, this.image);
+  final Player player;
+  PlayerCard(this.player);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-              child: Padding(
-            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-            child: Text(
-              name,
-              style: Theme.of(context).textTheme.headline6,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 7.5),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  player.name,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+              ),
             ),
-          )),
+          ),
           Image.asset(
-            image,
+            player.image,
             width: 125,
             height: 125,
           )

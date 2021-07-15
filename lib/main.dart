@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './models/player.dart';
 import './widgets/player_card.dart';
+import './widgets/invest.dart';
 
 void main() {
   runApp(MyApp());
@@ -36,6 +37,22 @@ class _MyHomePageState extends State<MyHomePage> {
     Player('Leonardo Bonucci', 'assets/images/bonucci.jpg'),
   ];
 
+  void startInvestment(Player player, BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (ctx) {
+        return Invest(PlayerCard(player), investInPlayer);
+      },
+    );
+  }
+
+  void investInPlayer(int amount, Player player) {
+    setState(() {
+      _balance -= amount;
+    });
+    print('Investment on ${player.name}: \$${amount.toString()}');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +62,10 @@ class _MyHomePageState extends State<MyHomePage> {
         body: ListView.builder(
           itemCount: _players.length,
           itemBuilder: (context, index) {
-            return PlayerCard(_players[index].name, _players[index].image);
+            return GestureDetector(
+              child: PlayerCard(_players[index]),
+              onTap: () => startInvestment(_players[index], context),
+            );
           },
         ));
   }
