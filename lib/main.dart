@@ -11,6 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHomePage(),
+      theme: ThemeData(
+          textTheme: TextTheme(
+              headline6: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
     );
   }
 }
@@ -22,13 +25,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _balance = 1000000;
-  // List<Map<String, Object>> _players = [
-  //   {'name': 'Leo Messi', 'image': 'assets/images/messi.jpg'},
-  //   {'name': 'Cristiano Ronaldo', 'image': 'assets/images/ronaldo.jpg'}
-  // ];
-  List<Player> _players = [
+  final List<Player> _players = [
     Player('Leo Messi', 'assets/images/messi.jpg'),
-    Player('Cristiano Ronaldo', 'assets/images/ronaldo.jpg')
+    Player('Cristiano Ronaldo', 'assets/images/ronaldo.jpg'),
+    Player('Angel Di Maria', 'assets/images/dimaria.jpg'),
+    Player('Romelu Lukaku', 'assets/images/lukaku.jpg'),
+    Player('Gianluigi Donnarumma', 'assets/images/donnarumma.jpg'),
+    Player('Neymar Jr', 'assets/images/neymar.jpg'),
+    Player('Kylian Mbappe', 'assets/images/mbappe.jpg'),
+    Player('Leonardo Bonucci', 'assets/images/bonucci.jpg'),
   ];
 
   @override

@@ -47,6 +47,13 @@ flutter:
   assets:
     - assets/images/messi.jpg
     - assets/images/ronaldo.jpg
+    - assets/images/bonucci.jpg
+    - assets/images/dimaria.jpg
+    - assets/images/lukaku.jpg
+    - assets/images/mbappe.jpg
+    - assets/images/neymar.jpg
+    - assets/images/donnarumma.jpg
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

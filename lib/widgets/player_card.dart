@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class PlayerCard extends StatelessWidget {
-  String name;
-  String image;
+  final String name;
+  final String image;
 
   PlayerCard(this.name, this.image);
 
@@ -12,9 +12,12 @@ class PlayerCard extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-              child: Text(
-            name,
-            style: Theme.of(context).textTheme.headline6,
+              child: Padding(
+            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+            child: Text(
+              name,
+              style: Theme.of(context).textTheme.headline6,
+            ),
           )),
           Image.asset(
             image,
