@@ -37,10 +37,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _balance = 1000000;
   final List<Player> _players = [
-    Player(name: 'Leo Messi', image: 'assets/images/messi.jpg', recentValues: [
-      ValueLog(time: DateTime(2019), value: 1000000),
-      ValueLog(time: DateTime(2021), value: 1200000)
-    ]),
+    Player(
+        name: 'Leo Messi',
+        image: 'assets/images/messi.jpg',
+        recentValues: [
+          ValueLog(time: DateTime(2019), value: 1000000),
+          ValueLog(time: DateTime(2021), value: 1200000)
+        ],
+        birthDate: DateTime(1987, 6, 24)),
     Player(
         name: 'Cristiano Ronaldo',
         image: 'assets/images/ronaldo.jpg',
@@ -48,13 +52,32 @@ class _MyHomePageState extends State<MyHomePage> {
           ValueLog(time: DateTime(2019), value: 1000000),
           ValueLog(time: DateTime(2020), value: 900000),
           ValueLog(time: DateTime(2021), value: 750000)
-        ]),
-    Player(name: 'Angel Di Maria', image: 'assets/images/dimaria.jpg'),
-    Player(name: 'Romelu Lukaku', image: 'assets/images/lukaku.jpg'),
-    Player(name: 'Gianluigi Donnarumma', image: 'assets/images/donnarumma.jpg'),
-    Player(name: 'Neymar Jr', image: 'assets/images/neymar.jpg'),
-    Player(name: 'Kylian Mbappe', image: 'assets/images/mbappe.jpg'),
-    Player(name: 'Leonardo Bonucci', image: 'assets/images/bonucci.jpg'),
+        ],
+        birthDate: DateTime(1985, 5, 2)),
+    Player(
+        name: 'Angel Di Maria',
+        image: 'assets/images/dimaria.jpg',
+        birthDate: DateTime(1988, 2, 14)),
+    Player(
+        name: 'Romelu Lukaku',
+        image: 'assets/images/lukaku.jpg',
+        birthDate: DateTime(1993, 5, 13)),
+    Player(
+        name: 'Gianluigi Donnarumma',
+        image: 'assets/images/donnarumma.jpg',
+        birthDate: DateTime(1999, 2, 25)),
+    Player(
+        name: 'Neymar Jr',
+        image: 'assets/images/neymar.jpg',
+        birthDate: DateTime(1992, 5, 2)),
+    Player(
+        name: 'Kylian Mbappe',
+        image: 'assets/images/mbappe.jpg',
+        birthDate: DateTime(1998, 12, 20)),
+    Player(
+        name: 'Leonardo Bonucci',
+        image: 'assets/images/bonucci.jpg',
+        birthDate: DateTime(1987, 5, 1)),
   ];
 
   void startInvestment(Player player, BuildContext ctx) {

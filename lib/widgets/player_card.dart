@@ -17,9 +17,21 @@ class PlayerCard extends StatelessWidget {
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  player.name,
-                  style: Theme.of(context).textTheme.headline6,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      player.name,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                      child: Text(
+                        'Age: ${player.age.toString()}',
+                        style: TextStyle(color: Colors.grey, fontSize: 18),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

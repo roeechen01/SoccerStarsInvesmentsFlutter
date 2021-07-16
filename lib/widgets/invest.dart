@@ -16,22 +16,21 @@ class _InvestState extends State<Invest> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        child: Container(
-            padding: EdgeInsets.all(10),
-            child: Column(children: [
-              //card,
-              TextButton(
-                  onPressed: () => amountController.text != ""
-                      ? widget.investFunction(context,
-                          int.parse(amountController.text), widget.card.player)
-                      : print('No input entered!'),
-                  child: Text('Invest!')),
-              TextField(
-                controller: amountController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(hintText: 'Your investment'),
-              ),
-            ])));
+    return Container(
+        padding: EdgeInsets.all(10),
+        child: Column(children: [
+          //card,
+          TextButton(
+              onPressed: () => amountController.text != ""
+                  ? widget.investFunction(context,
+                      int.parse(amountController.text), widget.card.player)
+                  : print('No input entered!'),
+              child: Text('Invest!')),
+          TextField(
+            controller: amountController,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(hintText: 'Your investment'),
+          ),
+        ]));
   }
 }
