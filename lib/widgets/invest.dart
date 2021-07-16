@@ -17,9 +17,9 @@ class _InvestState extends State<Invest> {
   @override
   Widget build(BuildContext context) {
     return Container(
+        height: 700,
         padding: EdgeInsets.all(10),
         child: Column(children: [
-          //card,
           TextButton(
               onPressed: () => amountController.text != ""
                   ? widget.investFunction(context,
@@ -31,6 +31,7 @@ class _InvestState extends State<Invest> {
             keyboardType: TextInputType.number,
             decoration: InputDecoration(hintText: 'Your investment'),
           ),
+          widget.card
         ]));
   }
 }

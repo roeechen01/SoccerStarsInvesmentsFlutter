@@ -1,0 +1,1 @@
+const TOTAL_STOCKS = 1000;

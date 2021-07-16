@@ -11,6 +11,19 @@ class PlayerCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Container(
+            width: 100,
+            height: 100,
+            margin: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                  image: AssetImage(
+                    player.image,
+                  ),
+                  fit: BoxFit.fill),
+            ),
+          ),
           Expanded(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 7.5),
@@ -27,9 +40,18 @@ class PlayerCard extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
                       child: Text(
-                        'Age: ${player.age.toString()}',
+                        'Value: \$${player.value.toString()}',
                         style: TextStyle(color: Colors.grey, fontSize: 18),
                       ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                      child: Text('Age: ${player.age}',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          )),
                     ),
                   ],
                 ),
@@ -37,7 +59,7 @@ class PlayerCard extends StatelessWidget {
             ),
           ),
           Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: Column(
                 children: [
                   Text('${player.pct}%'),
@@ -54,11 +76,6 @@ class PlayerCard extends StatelessWidget {
                         ),
                 ],
               )),
-          Image.asset(
-            player.image,
-            width: 125,
-            height: 125,
-          )
         ],
       ),
     );

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import './models/player.dart';
 import './widgets/player_card.dart';
 import './widgets/invest.dart';
 import './models/value_log.dart';
+import './helpers/utils.dart';
 
 void main() {
   runApp(MyApp());
@@ -82,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void startInvestment(Player player, BuildContext ctx) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: ctx,
       builder: (ctx) {
         return Invest(PlayerCard(player), investInPlayer);
@@ -90,6 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void investInPlayer(BuildContext ctx, var amount, Player player) {
+    HapticFeedback.mediumImpact();
     setState(() {
       _balance -= amount;
     });
@@ -99,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _players.printList();
     return Scaffold(
         appBar: AppBar(
           title: Text('Balance: \$$_balance'),
