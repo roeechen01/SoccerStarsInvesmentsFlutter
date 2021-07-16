@@ -82,28 +82,33 @@ class _MyHomePageState extends State<MyHomePage> {
         birthDate: DateTime(1987, 5, 1)),
   ];
 
+  int getBalance() {
+    return this._balance;
+  }
+
   void startInvestment(Player player, BuildContext ctx) {
     showModalBottomSheet(
       isScrollControlled: true,
       context: ctx,
       builder: (ctx) {
-        return Invest(PlayerCard(player), investInPlayer);
+        return Invest(PlayerCard(player), investInPlayer, _balance);
       },
     );
   }
 
-  void investInPlayer(BuildContext ctx, var amount, Player player) {
+  void investInPlayer(
+      BuildContext ctx, int stocksAmount, int money, Player player) {
     HapticFeedback.mediumImpact();
     setState(() {
-      _balance -= amount;
+      _balance -= money;
     });
-    print('Investment on ${player.name}: \$${amount.toString()}');
+    print('Investment on ${player.name}: \$${stocksAmount.toString()}');
+    player.stocks.addStocks(stocksAmount, player.id, 0);
     Navigator.pop(ctx);
   }
 
   @override
   Widget build(BuildContext context) {
-    _players.printList();
     return Scaffold(
         appBar: AppBar(
           title: Text('Balance: \$$_balance'),

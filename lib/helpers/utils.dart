@@ -23,8 +23,10 @@ extension RoeeStockList on List<Stock> {
   static int totalStocks = TOTAL_STOCKS;
 
   int get stocksLeft {
-    return this
-        .fold(0, (amount, stock) => amount + stock.userId == null ? 1 : 0);
+    return this.fold(0, (amount, stock) {
+      if (stock.userId == null) return ++amount;
+      return amount;
+    });
   }
 
   void addStocks(int amount, int playerId, int userId) {
