@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:soccer_stars_investments/helpers/config.dart';
+import 'package:soccer_stars_investments/models/stock.dart';
 import 'package:soccer_stars_investments/widgets/player_card.dart';
 import '../helpers/utils.dart';
 
@@ -17,6 +18,7 @@ class Invest extends StatefulWidget {
 class _InvestState extends State<Invest> {
   TextEditingController amountController = TextEditingController();
   int money = 0;
+  List<Stock> get stocks => widget.card.player.stocks;
 
   @override
   Widget build(BuildContext context) {
@@ -25,23 +27,31 @@ class _InvestState extends State<Invest> {
         padding: EdgeInsets.all(10),
         child: Column(children: [
           TextButton(
-              onPressed: () =>
-                  amountController.text != "" && widget.balance >= money
-                      ? widget.investFunction(
-                          context,
-                          int.parse(amountController.text),
-                          money,
-                          widget.card.player)
-                      : print('No input entered!'),
+              onPressed: () => amountController.text != "" &&
+                      amountController.text != "0" &&
+                      widget.balance >= money
+                  ? widget.investFunction(
+                      context,
+                      int.parse(amountController.text),
+                      money,
+                      widget.card.player)
+                  : print(
+                      'No input entered! / Not enough money to make investment'),
               child: Text('Invest!')),
           Row(
             children: [
               Container(
-                width: 300,
+                width: 275,
                 child: TextField(
                   controller: amountController,
                   keyboardType: TextInputType.number,
                   onChanged: (_) {
+                    if (int.parse(_) > stocks.stocksLeft) {
+                      amountController.text = stocks.stocksLeft.toString();
+                      amountController.selection = TextSelection.fromPosition(
+                          TextPosition(offset: amountController.text.length));
+                    }
+
                     setState(() {
                       money = widget.card.player.value ~/
                           TOTAL_STOCKS *
@@ -51,13 +61,21 @@ class _InvestState extends State<Invest> {
                   },
                   decoration: InputDecoration(
                       hintText:
-                          'Stocks amount (Stocks left: ${widget.card.player.stocks.stocksLeft})'),
+                          'Stocks amount (Stocks left: ${stocks.stocksLeft})'),
                 ),
               ),
-              Text(
-                '\$$money',
-                style: TextStyle(
-                    color: money <= widget.balance ? Colors.black : Colors.red),
+              Flexible(
+                fit: FlexFit.tight,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    'Price: \n\$$money',
+                    style: TextStyle(
+                        color: money <= widget.balance
+                            ? Colors.black
+                            : Colors.red),
+                  ),
+                ),
               )
             ],
           ),
