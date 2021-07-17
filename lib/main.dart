@@ -44,7 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
         image: 'assets/images/messi.jpg',
         recentValues: [
           ValueLog(time: DateTime(2019), value: 1000000),
-          ValueLog(time: DateTime(2021), value: 1200000)
+          ValueLog(time: DateTime(2019), value: 1050000),
+          ValueLog(time: DateTime(2021), value: 1100000)
         ],
         birthDate: DateTime(1987, 6, 24)),
     Player(
@@ -59,26 +60,56 @@ class _MyHomePageState extends State<MyHomePage> {
     Player(
         name: 'Angel Di Maria',
         image: 'assets/images/dimaria.jpg',
+        recentValues: [
+          ValueLog(time: DateTime(2019), value: 700000),
+          ValueLog(time: DateTime(2020), value: 650000),
+          ValueLog(time: DateTime(2021), value: 750000)
+        ],
         birthDate: DateTime(1988, 2, 14)),
     Player(
         name: 'Romelu Lukaku',
         image: 'assets/images/lukaku.jpg',
+        recentValues: [
+          ValueLog(time: DateTime(2019), value: 825000),
+          ValueLog(time: DateTime(2020), value: 875000),
+          ValueLog(time: DateTime(2021), value: 975000)
+        ],
         birthDate: DateTime(1993, 5, 13)),
     Player(
         name: 'Gianluigi Donnarumma',
         image: 'assets/images/donnarumma.jpg',
+        recentValues: [
+          ValueLog(time: DateTime(2019), value: 925000),
+          ValueLog(time: DateTime(2020), value: 975000),
+          ValueLog(time: DateTime(2021), value: 1150000)
+        ],
         birthDate: DateTime(1999, 2, 25)),
     Player(
         name: 'Neymar Jr',
         image: 'assets/images/neymar.jpg',
+        recentValues: [
+          ValueLog(time: DateTime(2019), value: 975000),
+          ValueLog(time: DateTime(2020), value: 1000000),
+          ValueLog(time: DateTime(2021), value: 975000)
+        ],
         birthDate: DateTime(1992, 5, 2)),
     Player(
         name: 'Kylian Mbappe',
         image: 'assets/images/mbappe.jpg',
+        recentValues: [
+          ValueLog(time: DateTime(2019), value: 1150000),
+          ValueLog(time: DateTime(2020), value: 1250000),
+          ValueLog(time: DateTime(2021), value: 1300000)
+        ],
         birthDate: DateTime(1998, 12, 20)),
     Player(
         name: 'Leonardo Bonucci',
         image: 'assets/images/bonucci.jpg',
+        recentValues: [
+          ValueLog(time: DateTime(2019), value: 850000),
+          ValueLog(time: DateTime(2020), value: 850000),
+          ValueLog(time: DateTime(2021), value: 860000)
+        ],
         birthDate: DateTime(1987, 5, 1)),
   ];
 
