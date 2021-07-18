@@ -11,6 +11,7 @@ class Player {
   DateTime birthDate;
   List<ValueLog> recentValues;
   List<Stock> stocks = List<Stock>();
+
   int get value => recentValues.last.value;
 
   Player({this.name, this.image, this.birthDate, this.recentValues, this.id}) {

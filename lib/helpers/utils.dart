@@ -45,10 +45,6 @@ extension RoeeStockList on List<Stock> {
     }
   }
 
-  bool isStockOwner(String id) {
-    for (Stock stock in this) {
-      if (stock.userId == id) return true;
-    }
-    return false;
-  }
+  int ownedStocksAmount(String id) => this
+      .fold(0, (counter, stock) => stock.userId == id ? counter + 1 : counter);
 }

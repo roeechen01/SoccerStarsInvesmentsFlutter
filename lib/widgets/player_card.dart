@@ -44,7 +44,7 @@ class PlayerCard extends StatelessWidget {
                         ),
                         Padding(
                           padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          child: player.stocks.isStockOwner(user.id)
+                          child: player.stocks.ownedStocksAmount(user.id) > 0
                               ? Icon(Icons.monetization_on)
                               : Text(''),
                         )

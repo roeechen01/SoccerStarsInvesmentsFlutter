@@ -137,7 +137,8 @@ class _MyHomePageState extends State<MyHomePage> {
       _balance -= money;
     });
     print('Investment on ${player.name}: \$${stocksAmount.toString()}');
-    player.stocks.addStocks(stocksAmount, player.id, user.id);
+    player.stocks
+        .addStocks(stocksAmount, player.id, user.id, money ~/ stocksAmount);
     Navigator.pop(ctx);
   }
 
