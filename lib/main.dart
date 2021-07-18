@@ -26,9 +26,15 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           home: MyHomePage(),
           theme: ThemeData(
-              textTheme: TextTheme(
-                  headline6:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+            textTheme: TextTheme(
+              headline6: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              bodyText1: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
+          ),
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            /* dark theme settings */
+          ),
         ));
   }
 }
@@ -149,6 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       setState(() {
                         player.stocks.sell(user.id);
                         _balance += moneyNet;
+                        generateNewValues();
                       });
                     },
                   )
@@ -175,10 +182,14 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void generateNewValues() {
+    for (Player p in _players) p.generateNewValue();
+  }
+
   void investInPlayer(
       BuildContext ctx, int stocksAmount, int money, Player player) {
     HapticFeedback.mediumImpact();
-    for (Player p in _players) p.generateNewValue();
+    generateNewValues();
     setState(() {
       _balance -= money;
     });

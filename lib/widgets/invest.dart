@@ -91,7 +91,7 @@ class _InvestState extends State<Invest> {
                     'Price: \n\$$money',
                     style: TextStyle(
                         color: money <= widget.balance
-                            ? Colors.black
+                            ? Colors.blueGrey
                             : Colors.red),
                   ),
                 ),
