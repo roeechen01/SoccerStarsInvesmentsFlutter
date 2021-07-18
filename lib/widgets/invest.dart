@@ -61,7 +61,7 @@ class _InvestState extends State<Invest> {
                       money = widget.card.player.value ~/
                           TOTAL_STOCKS *
                           int.parse(amountController.text);
-                      print(money);
+                      //print(money);
                     });
                   },
                   decoration: InputDecoration(
