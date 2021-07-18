@@ -128,7 +128,32 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Text("Sell Now?"),
             content: Text(
                 "Based on current commission (${(COMMISSION_RATE * 100).toInt()}%)\nYou will earn \$$moneyNet"),
-            actions: [],
+            actions: [
+              Row(
+                //mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    child: Text("Cancel"),
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                  ),
+                  TextButton(
+                    child: Text(
+                      "Sell Now",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                      Navigator.pop(context, true);
+                      setState(() {
+                        _balance += moneyNet;
+                      });
+                    },
+                  )
+                ],
+              )
+            ],
           );
         });
   }
