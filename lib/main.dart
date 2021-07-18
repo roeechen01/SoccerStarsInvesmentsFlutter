@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
           ),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
+
             /* dark theme settings */
           ),
         ));
@@ -47,13 +48,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _balance = 1000000;
   final User user = User();
+  final TextEditingController searchController = TextEditingController();
   final List<Player> _players = [
     Player(
         name: 'Leo Messi',
         image: 'assets/images/messi.jpg',
         recentValues: [
           ValueLog(time: DateTime(2019), value: 1000000),
-          ValueLog(time: DateTime(2019), value: 1050000),
+          ValueLog(time: DateTime(2020), value: 1050000),
           ValueLog(time: DateTime(2021), value: 1100000)
         ],
         birthDate: DateTime(1987, 6, 24)),
@@ -121,6 +123,13 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         birthDate: DateTime(1987, 5, 1)),
   ];
+  List<Player> get _playersToShow {
+    return _players
+        .where((player) => player.name
+            .toLowerCase()
+            .contains(searchController.text.toLowerCase()))
+        .toList();
+  }
 
   int getBalance() {
     return this._balance;
@@ -183,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void generateNewValues() {
-    for (Player p in _players) p.generateNewValue();
+    for (Player p in _players) p.generateNewValue(pctRange: 15);
   }
 
   void investInPlayer(
@@ -202,20 +211,41 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Balance: \$$_balance'),
-        ),
-        body: ListView.builder(
-          itemCount: _players.length,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              child: PlayerCard(
-                player: _players[index],
-                user: user,
+      appBar: AppBar(
+        title: Text('Balance: \$$_balance'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: TextField(
+                  controller: searchController,
+                  decoration:
+                      InputDecoration(hintText: 'Search player by name'),
+                  onChanged: (_) {
+                    setState(() {});
+                  }),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height - 150,
+              child: ListView.builder(
+                itemCount: _playersToShow.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    child: PlayerCard(
+                      player: _playersToShow[index],
+                      user: user,
+                    ),
+                    onTap: () =>
+                        startInvestment(_playersToShow[index], context),
+                  );
+                },
               ),
-              onTap: () => startInvestment(_players[index], context),
-            );
-          },
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
