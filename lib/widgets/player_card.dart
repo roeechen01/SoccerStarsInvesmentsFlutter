@@ -42,9 +42,12 @@ class PlayerCard extends StatelessWidget {
                           player.name,
                           style: Theme.of(context).textTheme.headline6,
                         ),
-                        player.stocks.isStockOwner(user.id)
-                            ? Text('Stocks owner')
-                            : Text('')
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          child: player.stocks.isStockOwner(user.id)
+                              ? Icon(Icons.monetization_on)
+                              : Text(''),
+                        )
                       ],
                     ),
                     Padding(
