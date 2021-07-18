@@ -125,7 +125,11 @@ class _MyHomePageState extends State<MyHomePage> {
       context: ctx,
       builder: (ctx) {
         return Invest(
-            PlayerCard(player: player, user: user), investInPlayer, _balance);
+          card: PlayerCard(player: player, user: user),
+          investFunction: investInPlayer,
+          balance: _balance,
+          user: user,
+        );
       },
     );
   }

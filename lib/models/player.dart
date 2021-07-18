@@ -38,7 +38,7 @@ class Player {
   }
 
   List<Stock> userStocks(String id) =>
-      stocks.where((stock) => stock.userId == id);
+      stocks.where((stock) => stock.userId == id).toList();
 
   int get age => birthDate.asAge;
 

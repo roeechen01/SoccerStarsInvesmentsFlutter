@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:soccer_stars_investments/helpers/config.dart';
 import 'package:soccer_stars_investments/models/stock.dart';
+import 'package:soccer_stars_investments/models/user.dart';
 import 'package:soccer_stars_investments/widgets/player_card.dart';
 import '../helpers/utils.dart';
 
@@ -8,8 +9,9 @@ class Invest extends StatefulWidget {
   final PlayerCard card;
   final Function investFunction;
   final int balance;
+  final User user;
 
-  Invest(this.card, this.investFunction, this.balance);
+  Invest({this.card, this.investFunction, this.balance, this.user});
 
   @override
   _InvestState createState() => _InvestState();
@@ -82,7 +84,17 @@ class _InvestState extends State<Invest> {
               )
             ],
           ),
-          widget.card
+          widget.card,
+          stocks.ownedStocksAmount(widget.user.id) > 0
+              ? Container(
+                  child: Column(children: [
+                    Text(
+                        'Your stocks: ${stocks.ownedStocksAmount(widget.user.id)}'),
+                    Text(
+                        'Paid on stocks: ${widget.card.player.userStocks(widget.user.id).moneySpent}'),
+                  ]),
+                )
+              : Container()
         ]));
   }
 }
