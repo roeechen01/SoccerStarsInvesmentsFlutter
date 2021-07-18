@@ -124,7 +124,8 @@ class _MyHomePageState extends State<MyHomePage> {
       isScrollControlled: true,
       context: ctx,
       builder: (ctx) {
-        return Invest(PlayerCard(player), investInPlayer, _balance);
+        return Invest(
+            PlayerCard(player: player, user: user), investInPlayer, _balance);
       },
     );
   }
@@ -136,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _balance -= money;
     });
     print('Investment on ${player.name}: \$${stocksAmount.toString()}');
-    player.stocks.addStocks(stocksAmount, player.id, 0);
+    player.stocks.addStocks(stocksAmount, player.id, user.id);
     Navigator.pop(ctx);
   }
 
@@ -150,7 +151,10 @@ class _MyHomePageState extends State<MyHomePage> {
           itemCount: _players.length,
           itemBuilder: (context, index) {
             return GestureDetector(
-              child: PlayerCard(_players[index]),
+              child: PlayerCard(
+                player: _players[index],
+                user: user,
+              ),
               onTap: () => startInvestment(_players[index], context),
             );
           },

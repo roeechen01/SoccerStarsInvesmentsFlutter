@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:soccer_stars_investments/models/player.dart';
+import 'package:soccer_stars_investments/models/user.dart';
+import '../helpers/utils.dart';
 
 class PlayerCard extends StatelessWidget {
   final Player player;
-  PlayerCard(this.player);
+  final User user;
+  PlayerCard({this.player, this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +36,16 @@ class PlayerCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      player.name,
-                      style: Theme.of(context).textTheme.headline6,
+                    Row(
+                      children: [
+                        Text(
+                          player.name,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        player.stocks.isStockOwner(user.id)
+                            ? Text('Stocks owner')
+                            : Text('')
+                      ],
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
