@@ -29,7 +29,7 @@ extension RoeeStockList on List<Stock> {
     });
   }
 
-  void addStocks(int amount, String playerId, String userId) {
+  void addStocks(int amount, String playerId, String userId, int lastPrice) {
     if (amount > this.stocksLeft) {
       print('Not enough available stocks to make the investment');
       return;
@@ -39,6 +39,7 @@ extension RoeeStockList on List<Stock> {
       if (this[i].userId == null) {
         this[i].playerId = playerId;
         this[i].userId = userId;
+        this[i].lastPrice = lastPrice;
         amount--;
       }
     }
