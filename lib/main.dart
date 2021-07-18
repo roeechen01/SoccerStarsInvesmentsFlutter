@@ -212,7 +212,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Balance: \$$_balance'),
+        title: Text('Balance: \$${_balance.stringWithCommas()}'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -228,7 +228,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   }),
             ),
             Container(
-              height: MediaQuery.of(context).size.height - 150,
+              height: MediaQuery.of(context).size.height -
+                  (AppBar().preferredSize.height + 100),
               child: ListView.builder(
                 itemCount: _playersToShow.length,
                 itemBuilder: (context, index) {

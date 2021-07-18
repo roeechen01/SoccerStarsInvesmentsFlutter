@@ -75,6 +75,9 @@ class _InvestState extends State<Invest> {
                         amountController.text = stocks.stocksLeft.toString();
                         amountController.selection = TextSelection.fromPosition(
                             TextPosition(offset: amountController.text.length));
+                        money = widget.card.player.value ~/
+                            TOTAL_STOCKS *
+                            stocks.stocksLeft;
                       }
                     });
                   },
@@ -88,7 +91,7 @@ class _InvestState extends State<Invest> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Text(
-                    'Price: \n\$$money',
+                    'Price: \n\$${money.stringWithCommas()}',
                     style: TextStyle(
                         color: money <= widget.balance
                             ? Colors.blueGrey

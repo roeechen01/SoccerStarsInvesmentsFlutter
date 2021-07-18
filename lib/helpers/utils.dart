@@ -11,6 +11,27 @@ extension RoeeDateTime on DateTime {
   }
 }
 
+extension RoeeInt on int {
+  String stringWithCommas() {
+    if (this == 0) return '0';
+    int number = this;
+    List<String> chars = List<String>();
+    while (number > 0) {
+      chars.add((number % 10).toString());
+      number ~/= 10;
+    }
+    int commaTime = 0;
+    for (int i = 0; i < chars.length; i++) {
+      commaTime++;
+      if (commaTime == 4) {
+        commaTime = 0;
+        chars.insert(i, ',');
+      }
+    }
+    return chars.reversed.fold("", (finalString, char) => finalString + char);
+  }
+}
+
 extension RoeeList on List {
   void printList() {
     for (int i = 0; i < this.length; i++) {
@@ -45,11 +66,23 @@ extension RoeeStockList on List<Stock> {
     }
   }
 
-  void sell(String id) {
-    for (Stock stock in this) {
-      if (stock.userId == id) {
-        stock.userId = null;
-        stock.lastPrice = null;
+  void sell(String id, {int stocksToSell}) {
+    if (stocksToSell == null) {
+      for (Stock stock in this) {
+        if (stock.userId == id) {
+          stock.userId = null;
+          stock.lastPrice = null;
+        }
+      }
+    } else {
+      int counter = stocksToSell;
+      for (int i = 0; i < stocksToSell; i++) {
+        if (this[i].userId == id) {
+          this[i].userId = null;
+          this[i].lastPrice = null;
+          counter--;
+          if (counter == 0) return;
+        }
       }
     }
   }

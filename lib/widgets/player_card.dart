@@ -53,7 +53,7 @@ class PlayerCard extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
                       child: Text(
-                        'Value: \$${player.value.toString()}',
+                        'Value: \$${player.value.stringWithCommas()}',
                         style: TextStyle(color: Colors.grey, fontSize: 18),
                       ),
                     ),
