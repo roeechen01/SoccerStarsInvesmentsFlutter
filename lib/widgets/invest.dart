@@ -10,8 +10,14 @@ class Invest extends StatefulWidget {
   final Function investFunction;
   final int balance;
   final User user;
+  final Function sellNowFunc;
 
-  Invest({this.card, this.investFunction, this.balance, this.user});
+  Invest(
+      {this.card,
+      this.investFunction,
+      this.balance,
+      this.user,
+      this.sellNowFunc});
 
   @override
   _InvestState createState() => _InvestState();
@@ -21,6 +27,14 @@ class _InvestState extends State<Invest> {
   TextEditingController amountController = TextEditingController();
   int money = 0;
   List<Stock> get stocks => widget.card.player.stocks;
+
+  int get stocksAmount => stocks.ownedStocksAmount(widget.user.id);
+  int get totalSpent =>
+      widget.card.player.userStocks(widget.user.id).moneySpent;
+  int get stocksValue =>
+      widget.card.player.value ~/
+      TOTAL_STOCKS *
+      stocks.ownedStocksAmount(widget.user.id);
 
   @override
   Widget build(BuildContext context) {
@@ -88,10 +102,19 @@ class _InvestState extends State<Invest> {
           stocks.ownedStocksAmount(widget.user.id) > 0
               ? Container(
                   child: Column(children: [
+                    Text('Your stocks: $stocksAmount'),
+                    Text('Paid on stocks: $totalSpent'),
+                    Text('Stocks value: $stocksValue'),
+                    Text('Earned in dollars: \$${stocksValue - totalSpent}'),
                     Text(
-                        'Your stocks: ${stocks.ownedStocksAmount(widget.user.id)}'),
-                    Text(
-                        'Paid on stocks: ${widget.card.player.userStocks(widget.user.id).moneySpent}'),
+                        'Yield pct: ${(((stocksValue - totalSpent) / totalSpent) * 100).toInt()}%'),
+                    FlatButton(
+                        onPressed: (widget.sellNowFunc),
+                        child: Text(
+                          'SELL NOW',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        color: Colors.yellow.shade600)
                   ]),
                 )
               : Container()

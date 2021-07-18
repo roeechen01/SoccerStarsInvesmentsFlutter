@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:soccer_stars_investments/helpers/utils.dart';
 import './value_log.dart';
 import './stock.dart';
@@ -21,12 +23,21 @@ class Player {
     if (birthDate == null) birthDate = DateTime(1985);
     initiateStocks();
     if (this.id == null) this.id = Uuid().v4();
+    //generateNewValue();
   }
 
   void initiateStocks() {
     for (int i = 0; i < TOTAL_STOCKS; i++) {
       stocks.add(Stock());
     }
+  }
+
+  void generateNewValue({int pctRange}) {
+    if (pctRange == null) pctRange = 10;
+    Random rnd = Random();
+    double rndNum = -pctRange + rnd.nextInt(pctRange * 2).toDouble();
+    recentValues.add(ValueLog(
+        time: DateTime.now(), value: (value * (1 + rndNum / 100)).toInt()));
   }
 
   int get pct {

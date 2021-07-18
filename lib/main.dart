@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:soccer_stars_investments/helpers/config.dart';
 import './models/player.dart';
 import './widgets/player_card.dart';
 import './widgets/invest.dart';
@@ -119,6 +120,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return this._balance;
   }
 
+  void sellNow() {}
+
   void startInvestment(Player player, BuildContext ctx) {
     showModalBottomSheet(
       isScrollControlled: true,
@@ -129,6 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
           investFunction: investInPlayer,
           balance: _balance,
           user: user,
+          sellNowFunc: sellNow,
         );
       },
     );
@@ -137,6 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void investInPlayer(
       BuildContext ctx, int stocksAmount, int money, Player player) {
     HapticFeedback.mediumImpact();
+    for (Player p in _players) p.generateNewValue();
     setState(() {
       _balance -= money;
     });
