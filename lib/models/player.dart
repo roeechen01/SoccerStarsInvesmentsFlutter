@@ -37,6 +37,9 @@ class Player {
     return lastValue == 0 ? 0 : ((difference / lastValue) * 100).toInt();
   }
 
+  List<Stock> userStocks(String id) =>
+      stocks.where((stock) => stock.userId == id);
+
   int get age => birthDate.asAge;
 
   @override

@@ -47,4 +47,9 @@ extension RoeeStockList on List<Stock> {
 
   int ownedStocksAmount(String id) => this
       .fold(0, (counter, stock) => stock.userId == id ? counter + 1 : counter);
+
+  int get moneySpent => this.fold(
+      0,
+      (totalSpent, stock) =>
+          stock.lastPrice != null ? totalSpent + stock.lastPrice : totalSpent);
 }
