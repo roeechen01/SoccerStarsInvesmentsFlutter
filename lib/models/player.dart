@@ -2,10 +2,10 @@ import 'package:soccer_stars_investments/helpers/utils.dart';
 import './value_log.dart';
 import './stock.dart';
 import '../helpers/config.dart';
+import 'package:uuid/uuid.dart';
 
 class Player {
-  int id;
-  static int idCounter = 0;
+  String id;
   String name;
   String image;
   DateTime birthDate;
@@ -13,13 +13,13 @@ class Player {
   List<Stock> stocks = List<Stock>();
   int get value => recentValues.last.value;
 
-  Player({this.name, this.image, this.birthDate, this.recentValues}) {
+  Player({this.name, this.image, this.birthDate, this.recentValues, this.id}) {
     if (recentValues == null) {
       recentValues = [ValueLog(), ValueLog()];
     }
     if (birthDate == null) birthDate = DateTime(1985);
     initiateStocks();
-    this.id = ++idCounter;
+    if (this.id == null) this.id = Uuid().v4();
   }
 
   void initiateStocks() {

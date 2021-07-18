@@ -5,6 +5,7 @@ import './widgets/player_card.dart';
 import './widgets/invest.dart';
 import './models/value_log.dart';
 import './helpers/utils.dart';
+import './models/user.dart';
 
 void main() {
   runApp(MyApp());
@@ -38,6 +39,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _balance = 1000000;
+  final User user = User();
   final List<Player> _players = [
     Player(
         name: 'Leo Messi',
