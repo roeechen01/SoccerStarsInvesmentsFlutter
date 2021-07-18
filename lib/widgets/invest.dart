@@ -62,12 +62,6 @@ class _InvestState extends State<Invest> {
                   controller: amountController,
                   keyboardType: TextInputType.number,
                   onChanged: (input) {
-                    if (int.parse(input) > stocks.stocksLeft) {
-                      amountController.text = stocks.stocksLeft.toString();
-                      amountController.selection = TextSelection.fromPosition(
-                          TextPosition(offset: amountController.text.length));
-                    }
-
                     setState(() {
                       if (amountController.text == "") {
                         money = 0;
@@ -76,6 +70,12 @@ class _InvestState extends State<Invest> {
                       money = widget.card.player.value ~/
                           TOTAL_STOCKS *
                           int.parse(amountController.text);
+
+                      if (int.parse(input) > stocks.stocksLeft) {
+                        amountController.text = stocks.stocksLeft.toString();
+                        amountController.selection = TextSelection.fromPosition(
+                            TextPosition(offset: amountController.text.length));
+                      }
                     });
                   },
                   decoration: InputDecoration(
