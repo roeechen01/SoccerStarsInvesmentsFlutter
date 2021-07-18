@@ -46,12 +46,11 @@ class _InvestState extends State<Invest> {
                   controller: amountController,
                   keyboardType: TextInputType.number,
                   onChanged: (input) {
-                    print("hey");
-                    /*if (int.parse(input) > stocks.stocksLeft) {
+                    if (int.parse(input) > stocks.stocksLeft) {
                       amountController.text = stocks.stocksLeft.toString();
                       amountController.selection = TextSelection.fromPosition(
                           TextPosition(offset: amountController.text.length));
-                    }*/
+                    }
 
                     setState(() {
                       if (amountController.text == "") {
