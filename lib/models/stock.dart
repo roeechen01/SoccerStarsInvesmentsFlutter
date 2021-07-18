@@ -1,5 +1,5 @@
 class Stock {
-  Stock({this.playerId, this.userId, int lastPrice});
+  Stock({this.playerId, this.userId, this.lastPrice});
 
   String playerId;
   String userId;

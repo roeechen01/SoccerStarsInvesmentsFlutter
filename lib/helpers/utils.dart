@@ -45,6 +45,15 @@ extension RoeeStockList on List<Stock> {
     }
   }
 
+  void sell(String id) {
+    for (Stock stock in this) {
+      if (stock.userId == id) {
+        stock.userId = null;
+        stock.lastPrice = null;
+      }
+    }
+  }
+
   int ownedStocksAmount(String id) => this
       .fold(0, (counter, stock) => stock.userId == id ? counter + 1 : counter);
 

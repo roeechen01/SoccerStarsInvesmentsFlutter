@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return this._balance;
   }
 
-  void sellNow(int moneyNet) {
+  void sellNow(int moneyNet, Player player) {
     showDialog(
         context: context,
         builder: (context) {
@@ -140,13 +140,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   TextButton(
                     child: Text(
-                      "Sell Now",
+                      "Sell",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
                       Navigator.pop(context, true);
                       Navigator.pop(context, true);
                       setState(() {
+                        player.stocks.sell(user.id);
                         _balance += moneyNet;
                       });
                     },
