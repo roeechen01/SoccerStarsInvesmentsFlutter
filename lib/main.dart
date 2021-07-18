@@ -120,7 +120,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return this._balance;
   }
 
-  void sellNow() {}
+  void sellNow(int moneyNet) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Sell Now?"),
+            content: Text(
+                "Based on current commission (${(COMMISSION_RATE * 100).toInt()}%)\nYou will earn \$$moneyNet"),
+            actions: [],
+          );
+        });
+  }
 
   void startInvestment(Player player, BuildContext ctx) {
     showModalBottomSheet(

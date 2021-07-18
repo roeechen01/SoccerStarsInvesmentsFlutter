@@ -109,7 +109,8 @@ class _InvestState extends State<Invest> {
                     Text(
                         'Yield pct: ${(((stocksValue - totalSpent) / totalSpent) * 100).toInt()}%'),
                     FlatButton(
-                        onPressed: (widget.sellNowFunc),
+                        onPressed: () => widget.sellNowFunc(
+                            (stocksValue * SELL_NOW_NET_RATE).toInt()),
                         child: Text(
                           'SELL NOW',
                           style: TextStyle(fontWeight: FontWeight.bold),
