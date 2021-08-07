@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:soccer_stars_investments/helpers/config.dart';
+import 'package:soccer_stars_investments/screens/tabs_screen.dart';
 import './models/player.dart';
 import './widgets/player_card.dart';
 import './widgets/invest.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
           }
         },
         child: MaterialApp(
-          home: MyHomePage(),
+          home: TabsScreen(),
           theme: ThemeData(
             textTheme: TextTheme(
               headline6: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -41,15 +42,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
+  int balance = 1000000;
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _balance = 1000000;
-  final User user = User();
-  final TextEditingController searchController = TextEditingController();
-  final List<Player> _players = [
+  static List<Player> players = [
     Player(
         name: 'Leo Messi',
         image: 'assets/images/messi.jpg',
@@ -123,8 +118,21 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         birthDate: DateTime(1987, 5, 1)),
   ];
-  List<Player> get _playersToShow {
-    return _players
+
+  String balancetitle() {
+    return 'Balance: \$${balance.stringWithCommas()}';
+  }
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final User user = User();
+  final TextEditingController searchController = TextEditingController();
+
+  List<Player> get playersToShow {
+    return MyHomePage.players
         .where((player) => player.name
             .toLowerCase()
             .contains(searchController.text.toLowerCase()))
@@ -132,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   int getBalance() {
-    return this._balance;
+    return this.widget.balance;
   }
 
   void sellNow(int moneyNet, Player player) {
@@ -163,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.pop(context, true);
                       setState(() {
                         player.stocks.sell(user.id);
-                        _balance += moneyNet;
+                        widget.balance += moneyNet;
                         generateNewValues();
                       });
                     },
@@ -183,7 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
         return Invest(
           card: PlayerCard(player: player, user: user),
           investFunction: investInPlayer,
-          balance: _balance,
+          balance: widget.balance,
           user: user,
           sellNowFunc: sellNow,
         );
@@ -192,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void generateNewValues() {
-    for (Player p in _players) p.generateNewValue(pctRange: 15);
+    for (Player p in MyHomePage.players) p.generateNewValue(pctRange: 15);
   }
 
   void investInPlayer(
@@ -200,7 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
     HapticFeedback.mediumImpact();
     generateNewValues();
     setState(() {
-      _balance -= money;
+      widget.balance -= money;
     });
     print('Investment on ${player.name}: \$${stocksAmount.toString()}');
     player.stocks
@@ -210,42 +218,35 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Balance: \$${_balance.stringWithCommas()}'),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                  controller: searchController,
-                  decoration:
-                      InputDecoration(hintText: 'Search player by name'),
-                  onChanged: (_) {
-                    setState(() {});
-                  }),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: TextField(
+                controller: searchController,
+                decoration: InputDecoration(hintText: 'Search player by name'),
+                onChanged: (_) {
+                  setState(() {});
+                }),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height -
+                (AppBar().preferredSize.height + 100),
+            child: ListView.builder(
+              itemCount: playersToShow.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  child: PlayerCard(
+                    player: playersToShow[index],
+                    user: user,
+                  ),
+                  onTap: () => startInvestment(playersToShow[index], context),
+                );
+              },
             ),
-            Container(
-              height: MediaQuery.of(context).size.height -
-                  (AppBar().preferredSize.height + 100),
-              child: ListView.builder(
-                itemCount: _playersToShow.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    child: PlayerCard(
-                      player: _playersToShow[index],
-                      user: user,
-                    ),
-                    onTap: () =>
-                        startInvestment(_playersToShow[index], context),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
